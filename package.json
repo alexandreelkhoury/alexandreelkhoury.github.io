@@ -7,7 +7,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "homepage": "https://github.com/alexandreelkhoury/alexandreelkhoury.github.io"
 }
