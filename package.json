@@ -1,5 +1,13 @@
 {
   "dependencies": {
     "yarn": "^1.22.19"
-  }
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+  },
+  "homepage": "https://github.com/alexandreelkhoury/alexandreelkhoury.github.io"
 }
