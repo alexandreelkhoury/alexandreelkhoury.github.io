@@ -30,7 +30,7 @@ export default async function handler(req, res) {
   // Following https://docs.hcaptcha.com/
   const captchaServiceResponse = await fetch('https://hcaptcha.com/siteverify', {
     method: 'POST',
-    body: `response=${token}&secret=${process.env.HCAPTCHA_SECRET}`,
+    body: `response=${token}&secret=0x0000000000000000000000000000000000000000`,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   });
 
@@ -40,19 +40,20 @@ export default async function handler(req, res) {
     // Captcha validation failed
     return res.status(400).json({});
   }
-  
+
   // After passing the captcha, we can submit the request to the Defender Autotask.
   // Remember that the autotask quota is (at least in free plan) limited to 120 runs / hour.
   // Assuming all autotask executions end up as actual mints in the contract,
   // then this app can only support up to 120 mint operations per hour.
-  
+
   let autotaskResponse = await fetch(
-    `https://api.defender.openzeppelin.com/autotasks/${process.env.AUTOTASK_SECRET_WEBHOOK}`,
+    //`https://api.defender.openzeppelin.com/autotasks/${process.env.AUTOTASK_SECRET_WEBHOOK}`,
+    `https://api.defender.openzeppelin.com/autotasks/e9043d96-710b-41a9-aa65-8f6bfbbfaadd/runs/webhook/42e15ab2-375b-4c62-8395-febcfea81df6/PPxBQgyP6EGzmDNrZ2pZHP`,
     {
       method: 'POST',
       body: JSON.stringify({ // Autotask webhook expects a JSON string in the request's body
         userAddress: address,
-        contractAddress: process.env.NEXT_PUBLIC_NFT_ADDRESS
+        contractAddress: "0xb915f35e7ab810333c0de86585f6d97273d197b2"
       })
     }
   );
